@@ -1,0 +1,33 @@
+[
+  {
+    "rank": 1,
+    "name": "TuNombreTop1",
+    "discord_id": "Tu#0001",
+    "skin_image": "images/tu_skin_top1.png",
+    "strengths": {
+      "combo_pvp": 5,
+      "crystal_pvp": 5,
+      "axe_pvp": 5,
+      "sword_pvp": 5,
+      "health_regen": 5
+    },
+    "total_score": 25,
+    "proof_video": "https://youtube.com/link-video-top1"
+  },
+  {
+    "rank": 2,
+    "name": "JugadorDePrueba2",
+    "discord_id": "Prueba#0002",
+    "skin_image": "images/jugador_prueba2.png",
+    "strengths": {
+      "combo_pvp": 4,
+      "crystal_pvp": 3,
+      "axe_pvp": 5,
+      "sword_pvp": 4,
+      "health_regen": 3
+    },
+    "total_score": 19,
+    "proof_video": "https://youtube.com/link-video-top2"
+  }
+  // Añade el resto de tus 200 jugadores aquí...
+]
