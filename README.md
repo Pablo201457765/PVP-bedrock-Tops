@@ -1,0 +1,1 @@
+ Bienvenido a pvp bedrock Tops Este es un proyecto creado para la gente que es buena en Minecraft bedrock pueda unirse y demostrar su poder acá enseñamos los rangos y lo mejor es que son en pvp este proyecto sirve para saber si hay gente buena en pvp no solo en Minecraft Java también en Minecraft bedrock
