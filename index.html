@@ -2,20 +2,21 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Minecraft Bedrock PVP Rankings</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./style.css">
+    <meta name="theme-color" content="#1a1a1a">
 </head>
 <body>
     <!-- Pantalla de carga -->
     <div id="loading-screen">
-        <video id="loading-video" autoplay muted playsinline>
-            <source src="pantalla-de-carga-x1.mp4" type="video/mp4">
-            <div style="color: white; text-align: center;">
-                <h2>Cargando...</h2>
-                <p>Coloca el archivo: pantalla-de-carga-x1.mp4</p>
-            </div>
+        <video id="loading-video" autoplay muted playsinline preload="auto">
+            <source src="./pantalla-de-carga-x1.mp4" type="video/mp4">
         </video>
+        <div class="loading-fallback">
+            <h2>⏳ Cargando...</h2>
+            <p>Minecraft Bedrock PVP</p>
+        </div>
     </div>
 
     <!-- Aplicación principal -->
@@ -91,6 +92,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="./script.js"></script>
 </body>
 </html>
