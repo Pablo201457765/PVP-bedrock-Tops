@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -914,4 +913,163 @@
 
             <div class="perfil-section">
                 <h3>🏆 Modalidades</h3>
-                <div class
+                <div class="perfil-section-content">
+                    🥊 Mazo: Top 1<br>
+                    💎 Crystal: Top 1<br>
+                    ⚔️ Espada: Top 1<br>
+                    🎯 SG: Top 1<br>
+                    🌌 Skyward: Top 1
+                </div>
+            </div>
+
+            <div class="perfil-section">
+                <h3>📝 Descripción</h3>
+                <div class="perfil-section-content">
+                    ¡Jugador apasionado de Minecraft Bedrock PVP! Me especializo en todas las modalidades y siempre busco mejorar. El primero en unirse al ranking.
+                </div>
+            </div>
+
+            <div class="perfil-section">
+                <h3>📱 Ver mis jugadas</h3>
+                <a href="#" class="perfil-link-btn" onclick="event.preventDefault(); alert('Link a TikTok - Disponible pronto')">
+                    📱 TikTok
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup">
+            <h3>⚠️ Oh no!</h3>
+            <p>Todavía es una demo.<br>Esta función no está disponible.</p>
+            <button class="popup-btn" onclick="closePopup()">OK</button>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        const loadingScreen = document.getElementById('loading-screen');
+        const loadingVideo = document.getElementById('loading-video');
+        const app = document.getElementById('app');
+        const navItems = document.querySelectorAll('.nav-item');
+        const popup = document.getElementById('popup');
+        const perfilFullscreen = document.getElementById('perfil-fullscreen');
+        let appShown = false;
+
+        // Pantalla de carga
+        function showApp() {
+            if (appShown) return;
+            appShown = true;
+            loadingScreen.style.display = 'none';
+            app.classList.add('show');
+        }
+
+        loadingVideo.addEventListener('ended', showApp);
+        loadingVideo.addEventListener('error', () => setTimeout(showApp, 2000));
+        setTimeout(showApp, 5500);
+
+        // Navegación
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const page = this.getAttribute('data-page');
+                
+                navItems.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+                
+                document.querySelectorAll('.page-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                if (page === 'tops') {
+                    document.getElementById('tops-section').classList.add('active');
+                } else if (page === 'amigos') {
+                    document.getElementById('amigos-section').classList.add('active');
+                } else if (page === 'perfil') {
+                    perfilFullscreen.classList.add('show');
+                } else if (page === 'config') {
+                    document.getElementById('config-section').classList.add('active');
+                }
+            });
+        });
+
+        // Cambiar modalidad
+        document.querySelectorAll('.modalidad-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.modalidad-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Funciones de perfil
+        function cerrarPerfil() {
+            perfilFullscreen.classList.remove('show');
+        }
+
+        // Funciones de configuración
+        function cambiarFondoColor(color) {
+            document.body.style.background = color;
+            document.body.classList.remove('custom-bg');
+        }
+
+        function cambiarFondoImagen(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.body.style.backgroundImage = `url(${e.target.result})`;
+                    document.body.classList.add('custom-bg');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function resetearFondo() {
+            document.body.style.background = '#0a0a0a';
+            document.body.style.backgroundImage = 'none';
+            document.body.classList.remove('custom-bg');
+        }
+
+        function cambiarModo(modo) {
+            const options = document.querySelectorAll('.mode-option');
+            const warning = document.getElementById('modeWarning');
+            
+            options.forEach(opt => opt.classList.remove('active'));
+            
+            if (modo === 'dark') {
+                options[0].classList.add('active');
+                warning.innerHTML = '✅ Modo oscuro ahorra batería y es mejor para tus ojos';
+                warning.style.background = 'rgba(0, 255, 136, 0.1)';
+                // Aplicar modo oscuro
+                document.querySelectorAll('.header, .modalidades-bar, .bottom-nav').forEach(el => {
+                    el.style.opacity = '1';
+                });
+            } else {
+                options[1].classList.add('active');
+                warning.innerHTML = '⚠️ Modo brillante gastará más batería y puede molestar los ojos';
+                warning.style.background = 'rgba(255, 170, 0, 0.1)';
+                // Aplicar modo claro (demo - solo visual)
+                alert('Modo claro estará disponible en versiones futuras');
+            }
+        }
+
+        // Funciones de popup
+        function closePopup() {
+            popup.classList.remove('show');
+        }
+
+        function showAddFriendDemo() {
+            popup.classList.add('show');
+        }
+
+        // Cerrar popups al hacer clic fuera
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) closePopup();
+        });
+
+        perfilFullscreen.addEventListener('click', (e) => {
+            if (e.target === perfilFullscreen) cerrarPerfil();
+        });
+    </script>
+</body>
+</html>
