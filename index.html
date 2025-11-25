@@ -30,11 +30,6 @@
             background-attachment: fixed;
         }
 
-        /* Overlay para fondos personalizados */
-        .content-overlay {
-            background: rgba(0, 0, 0, 0.7);
-        }
-
         /* Pantalla de carga */
         #loading-screen {
             position: fixed;
@@ -67,30 +62,79 @@
             display: flex;
         }
 
-        /* Header */
-        .header {
-            background: linear-gradient(135deg, #1f1f1f 0%, #2d2d2d 100%);
-            padding: 15px 20px;
-            text-align: center;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.8);
-            border-bottom: 2px solid #333;
+        /* Banner de permisos estilo iPhone */
+        .permission-banner {
+            position: fixed;
+            top: -200px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 400px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
+            border: 2px solid #333;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+            z-index: 9500;
+            transition: top 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
         }
 
-        .header h1 {
-            font-size: 16px;
+        .permission-banner.show {
+            top: 20px;
+        }
+
+        .permission-icon {
+            font-size: 40px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .permission-title {
+            font-size: 18px;
             font-weight: 800;
-            letter-spacing: 0.5px;
+            text-align: center;
+            margin-bottom: 10px;
             background: linear-gradient(90deg, #00ff88 0%, #00ccff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .version {
-            font-size: 9px;
-            color: #666;
-            margin-top: 3px;
-            font-weight: 600;
+        .permission-desc {
+            font-size: 13px;
+            color: #aaa;
+            text-align: center;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .permission-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .permission-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .permission-btn.allow {
+            background: linear-gradient(90deg, #00ff88 0%, #00ccff 100%);
+            color: #000;
+        }
+
+        .permission-btn.deny {
+            background: #2a2a2a;
+            color: #fff;
+        }
+
+        .permission-btn:active {
+            transform: scale(0.95);
         }
 
         /* Modalidades horizontales */
@@ -244,57 +288,6 @@
             line-height: 1.6;
         }
 
-        .jugador-card {
-            background: linear-gradient(135deg, #1a1a1a 0%, #252525 100%);
-            border-radius: 16px;
-            padding: 15px;
-            margin-bottom: 12px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border: 2px solid #2a2a2a;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-        }
-
-        .jugador-skin {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #00ff88, #00ccff);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            flex-shrink: 0;
-        }
-
-        .jugador-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .jugador-nombre {
-            font-weight: 800;
-            font-size: 14px;
-            background: linear-gradient(90deg, #00ff88 0%, #00ccff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 4px;
-        }
-
-        .jugador-modalidades {
-            font-size: 9px;
-            color: #888;
-        }
-
-        .jugador-position {
-            font-size: 18px;
-            font-weight: 800;
-            color: #ffff00;
-            flex-shrink: 0;
-        }
-
         /* Perfil pantalla completa */
         .perfil-fullscreen {
             display: none;
@@ -325,6 +318,9 @@
             justify-content: space-between;
             align-items: center;
             border-bottom: 2px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .perfil-title {
@@ -438,6 +434,7 @@
             justify-content: center;
             padding: 40px 20px;
             text-align: center;
+            flex: 1;
         }
 
         .amigos-empty h3 {
@@ -472,6 +469,7 @@
         .config-container {
             padding: 20px;
             overflow-y: auto;
+            flex: 1;
         }
 
         .config-option {
@@ -749,13 +747,19 @@
         </video>
     </div>
 
+    <!-- Banner de permisos -->
+    <div class="permission-banner" id="permission-banner">
+        <div class="permission-icon" id="permission-icon">📞</div>
+        <div class="permission-title" id="permission-title">¿Quieres añadir amigos?</div>
+        <div class="permission-desc" id="permission-desc">Activa contactos para añadir gente con tu número o con nombre de Minecraft</div>
+        <div class="permission-buttons">
+            <button class="permission-btn deny" onclick="denyPermission()">No permitir</button>
+            <button class="permission-btn allow" onclick="allowPermission()">Permitir</button>
+        </div>
+    </div>
+
     <!-- App principal -->
     <div id="app">
-        <div class="header">
-            <h1>🎮 MINECRAFT BEDROCK PVP</h1>
-            <div class="version">Demo v0.0.2</div>
-        </div>
-
         <div class="content">
             <!-- Sección TOPS -->
             <div id="tops-section" class="page-section active" style="flex-direction: column;">
@@ -829,7 +833,7 @@
                         <h3>😔 Oh no, no tienes amigos</h3>
                         <p>Agrega amigos para jugar juntos</p>
                     </div>
-                    <button class="add-friend-btn" onclick="showAddFriendDemo()">➕ Añadir Amigo</button>
+                    <button class="add-friend-btn" onclick="requestContactsPermission()">➕ Añadir Amigo</button>
                 </div>
             </div>
 
@@ -955,19 +959,66 @@
         const navItems = document.querySelectorAll('.nav-item');
         const popup = document.getElementById('popup');
         const perfilFullscreen = document.getElementById('perfil-fullscreen');
+        const permissionBanner = document.getElementById('permission-banner');
         let appShown = false;
+        let contactsPermissionGranted = false;
+        let notificationsPermissionGranted = false;
 
-        // Pantalla de carga
+        // Pantalla de carga - MEJORADA
         function showApp() {
             if (appShown) return;
             appShown = true;
-            loadingScreen.style.display = 'none';
-            app.classList.add('show');
+            
+            console.log('Mostrando app...');
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                app.style.display = 'flex';
+                app.classList.add('show');
+                console.log('App mostrada correctamente');
+            }, 500);
         }
 
-        loadingVideo.addEventListener('ended', showApp);
-        loadingVideo.addEventListener('error', () => setTimeout(showApp, 2000));
-        setTimeout(showApp, 5500);
+        // Múltiples listeners para asegurar que funcione
+        loadingVideo.addEventListener('ended', () => {
+            console.log('Video terminado');
+            showApp();
+        });
+
+        loadingVideo.addEventListener('error', (e) => {
+            console.log('Error al cargar video:', e);
+            setTimeout(showApp, 1000);
+        });
+
+        // Si el video se reproduce pero no dispara 'ended'
+        loadingVideo.addEventListener('timeupdate', function() {
+            if (this.duration > 0 && this.currentTime >= this.duration - 0.1) {
+                console.log('Video casi terminado (timeupdate)');
+                showApp();
+            }
+        });
+
+        // Fallback: intentar reproducir el video
+        loadingVideo.play().catch(err => {
+            console.log('No se pudo reproducir video:', err);
+            setTimeout(showApp, 1000);
+        });
+
+        // Timeout de seguridad REDUCIDO - 6 segundos máximo
+        setTimeout(() => {
+            console.log('Timeout de seguridad activado');
+            showApp();
+        }, 6000);
+
+        // Fallback adicional: si después de 2 segundos el video no ha empezado
+        setTimeout(() => {
+            if (loadingVideo.currentTime === 0 && !appShown) {
+                console.log('Video no se reprodujo, mostrando app');
+                showApp();
+            }
+        }, 2000);
 
         // Navegación
         navItems.forEach(item => {
@@ -1000,6 +1051,60 @@
                 this.classList.add('active');
             });
         });
+
+        // Sistema de permisos
+        function showPermissionBanner(type) {
+            const icon = document.getElementById('permission-icon');
+            const title = document.getElementById('permission-title');
+            const desc = document.getElementById('permission-desc');
+
+            if (type === 'contacts') {
+                icon.textContent = '📞';
+                title.textContent = '¿Quieres añadir amigos?';
+                desc.textContent = 'Activa contactos para añadir gente con tu número o con nombre de Minecraft';
+            } else if (type === 'notifications') {
+                icon.textContent = '🔔';
+                title.textContent = 'Activa las notificaciones';
+                desc.textContent = 'Te notificaremos cuando te eliminen del top o para que veas tus estadísticas';
+            }
+
+            permissionBanner.classList.add('show');
+            
+            setTimeout(() => {
+                permissionBanner.classList.remove('show');
+            }, 10000);
+        }
+
+        function requestContactsPermission() {
+            if (contactsPermissionGranted) {
+                popup.classList.add('show');
+            } else {
+                showPermissionBanner('contacts');
+            }
+        }
+
+        function allowPermission() {
+            const title = document.getElementById('permission-title').textContent;
+            
+            if (title.includes('amigos')) {
+                contactsPermissionGranted = true;
+                console.log('Permiso de contactos concedido');
+            } else if (title.includes('notificaciones')) {
+                notificationsPermissionGranted = true;
+                console.log('Permiso de notificaciones concedido');
+            }
+            
+            permissionBanner.classList.remove('show');
+            
+            setTimeout(() => {
+                alert('¡Permiso concedido! Esta función estará disponible pronto.');
+            }, 300);
+        }
+
+        function denyPermission() {
+            permissionBanner.classList.remove('show');
+            console.log('Permiso denegado');
+        }
 
         // Funciones de perfil
         function cerrarPerfil() {
@@ -1040,15 +1145,10 @@
                 options[0].classList.add('active');
                 warning.innerHTML = '✅ Modo oscuro ahorra batería y es mejor para tus ojos';
                 warning.style.background = 'rgba(0, 255, 136, 0.1)';
-                // Aplicar modo oscuro
-                document.querySelectorAll('.header, .modalidades-bar, .bottom-nav').forEach(el => {
-                    el.style.opacity = '1';
-                });
             } else {
                 options[1].classList.add('active');
                 warning.innerHTML = '⚠️ Modo brillante gastará más batería y puede molestar los ojos';
                 warning.style.background = 'rgba(255, 170, 0, 0.1)';
-                // Aplicar modo claro (demo - solo visual)
                 alert('Modo claro estará disponible en versiones futuras');
             }
         }
@@ -1058,10 +1158,6 @@
             popup.classList.remove('show');
         }
 
-        function showAddFriendDemo() {
-            popup.classList.add('show');
-        }
-
         // Cerrar popups al hacer clic fuera
         popup.addEventListener('click', (e) => {
             if (e.target === popup) closePopup();
@@ -1069,6 +1165,13 @@
 
         perfilFullscreen.addEventListener('click', (e) => {
             if (e.target === perfilFullscreen) cerrarPerfil();
+        });
+
+        // Cerrar banner de permisos al hacer clic fuera
+        permissionBanner.addEventListener('click', (e) => {
+            if (e.target === permissionBanner) {
+                permissionBanner.classList.remove('show');
+            }
         });
     </script>
 </body>
