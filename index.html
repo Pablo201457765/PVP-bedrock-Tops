@@ -62,10 +62,10 @@
             display: flex;
         }
 
-        /* Banner de permisos estilo iPhone */
+        /* Banner de permisos estilo iPhone - ARREGLADO */
         .permission-banner {
             position: fixed;
-            top: -200px;
+            top: -300px;
             left: 50%;
             transform: translateX(-50%);
             width: 90%;
@@ -77,10 +77,12 @@
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
             z-index: 9500;
             transition: top 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            pointer-events: none;
         }
 
         .permission-banner.show {
             top: 20px;
+            pointer-events: auto;
         }
 
         .permission-icon {
@@ -170,8 +172,11 @@
         }
 
         .modalidad-btn-icon {
-            font-size: 20px;
+            width: 32px;
+            height: 32px;
             margin-bottom: 3px;
+            image-rendering: pixelated;
+            object-fit: contain;
         }
 
         .modalidad-btn-text {
@@ -256,6 +261,15 @@
             padding: 8px;
             margin-bottom: 8px;
             text-align: center;
+        }
+
+        .user-stat-icon {
+            width: 20px;
+            height: 20px;
+            image-rendering: pixelated;
+            object-fit: contain;
+            display: inline-block;
+            vertical-align: middle;
         }
 
         .user-stat-mode {
@@ -413,6 +427,18 @@
             color: #bbb;
             font-size: 13px;
             line-height: 1.8;
+        }
+
+        .perfil-mode-item {
+            margin-bottom: 8px;
+        }
+
+        .perfil-mode-icon {
+            width: 16px;
+            height: 16px;
+            image-rendering: pixelated;
+            vertical-align: middle;
+            margin-right: 5px;
         }
 
         .perfil-link-btn {
@@ -765,23 +791,23 @@
             <div id="tops-section" class="page-section active" style="flex-direction: column;">
                 <div class="modalidades-bar">
                     <div class="modalidad-btn active" data-mode="mazo">
-                        <div class="modalidad-btn-icon">🥊</div>
+                        <img src="mazo.png" alt="Mazo" class="modalidad-btn-icon">
                         <div class="modalidad-btn-text">MAZO</div>
                     </div>
                     <div class="modalidad-btn" data-mode="crystal">
-                        <div class="modalidad-btn-icon">💎</div>
+                        <img src="crystal.png" alt="Crystal" class="modalidad-btn-icon">
                         <div class="modalidad-btn-text">CRYSTAL</div>
                     </div>
                     <div class="modalidad-btn" data-mode="espada">
-                        <div class="modalidad-btn-icon">⚔️</div>
+                        <img src="espada.png" alt="Espada" class="modalidad-btn-icon">
                         <div class="modalidad-btn-text">ESPADA</div>
                     </div>
                     <div class="modalidad-btn" data-mode="sg">
-                        <div class="modalidad-btn-icon">🎯</div>
+                        <img src="sg.png" alt="SG" class="modalidad-btn-icon">
                         <div class="modalidad-btn-text">SG</div>
                     </div>
                     <div class="modalidad-btn" data-mode="skyward">
-                        <div class="modalidad-btn-icon">🌌</div>
+                        <img src="skyward.png" alt="Skyward" class="modalidad-btn-icon">
                         <div class="modalidad-btn-text">SKYWARD</div>
                     </div>
                 </div>
@@ -802,23 +828,23 @@
                         </div>
                         <div class="user-panel-stats">
                             <div class="user-stat-item">
-                                <div class="user-stat-mode">🥊 Mazo</div>
+                                <div class="user-stat-mode"><img src="mazo.png" class="user-stat-icon"> Mazo</div>
                                 <div class="user-stat-pos">Top 1</div>
                             </div>
                             <div class="user-stat-item">
-                                <div class="user-stat-mode">💎 Crystal</div>
+                                <div class="user-stat-mode"><img src="crystal.png" class="user-stat-icon"> Crystal</div>
                                 <div class="user-stat-pos">Top 1</div>
                             </div>
                             <div class="user-stat-item">
-                                <div class="user-stat-mode">⚔️ Espada</div>
+                                <div class="user-stat-mode"><img src="espada.png" class="user-stat-icon"> Espada</div>
                                 <div class="user-stat-pos">Top 1</div>
                             </div>
                             <div class="user-stat-item">
-                                <div class="user-stat-mode">🎯 SG</div>
+                                <div class="user-stat-mode"><img src="sg.png" class="user-stat-icon"> SG</div>
                                 <div class="user-stat-pos">Top 1</div>
                             </div>
                             <div class="user-stat-item">
-                                <div class="user-stat-mode">🌌 Skyward</div>
+                                <div class="user-stat-mode"><img src="skyward.png" class="user-stat-icon"> Skyward</div>
                                 <div class="user-stat-pos">Top 1</div>
                             </div>
                         </div>
@@ -918,11 +944,11 @@
             <div class="perfil-section">
                 <h3>🏆 Modalidades</h3>
                 <div class="perfil-section-content">
-                    🥊 Mazo: Top 1<br>
-                    💎 Crystal: Top 1<br>
-                    ⚔️ Espada: Top 1<br>
-                    🎯 SG: Top 1<br>
-                    🌌 Skyward: Top 1
+                    <div class="perfil-mode-item"><img src="mazo.png" class="perfil-mode-icon"> Mazo: Top 1</div>
+                    <div class="perfil-mode-item"><img src="crystal.png" class="perfil-mode-icon"> Crystal: Top 1</div>
+                    <div class="perfil-mode-item"><img src="espada.png" class="perfil-mode-icon"> Espada: Top 1</div>
+                    <div class="perfil-mode-item"><img src="sg.png" class="perfil-mode-icon"> SG: Top 1</div>
+                    <div class="perfil-mode-item"><img src="skyward.png" class="perfil-mode-icon"> Skyward: Top 1</div>
                 </div>
             </div>
 
@@ -992,7 +1018,6 @@
             setTimeout(showApp, 1000);
         });
 
-        // Si el video se reproduce pero no dispara 'ended'
         loadingVideo.addEventListener('timeupdate', function() {
             if (this.duration > 0 && this.currentTime >= this.duration - 0.1) {
                 console.log('Video casi terminado (timeupdate)');
@@ -1000,19 +1025,16 @@
             }
         });
 
-        // Fallback: intentar reproducir el video
         loadingVideo.play().catch(err => {
             console.log('No se pudo reproducir video:', err);
             setTimeout(showApp, 1000);
         });
 
-        // Timeout de seguridad REDUCIDO - 6 segundos máximo
         setTimeout(() => {
             console.log('Timeout de seguridad activado');
             showApp();
         }, 6000);
 
-        // Fallback adicional: si después de 2 segundos el video no ha empezado
         setTimeout(() => {
             if (loadingVideo.currentTime === 0 && !appShown) {
                 console.log('Video no se reprodujo, mostrando app');
@@ -1052,7 +1074,7 @@
             });
         });
 
-        // Sistema de permisos
+        // Sistema de permisos - ARREGLADO
         function showPermissionBanner(type) {
             const icon = document.getElementById('permission-icon');
             const title = document.getElementById('permission-title');
@@ -1069,10 +1091,6 @@
             }
 
             permissionBanner.classList.add('show');
-            
-            setTimeout(() => {
-                permissionBanner.classList.remove('show');
-            }, 10000);
         }
 
         function requestContactsPermission() {
@@ -1165,13 +1183,6 @@
 
         perfilFullscreen.addEventListener('click', (e) => {
             if (e.target === perfilFullscreen) cerrarPerfil();
-        });
-
-        // Cerrar banner de permisos al hacer clic fuera
-        permissionBanner.addEventListener('click', (e) => {
-            if (e.target === permissionBanner) {
-                permissionBanner.classList.remove('show');
-            }
         });
     </script>
 </body>
