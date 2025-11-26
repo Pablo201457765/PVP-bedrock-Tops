@@ -963,7 +963,509 @@
                         <img src="mazo.png" alt="Mazo" class="modalidad-btn-icon">
                         <div class="modalidad-btn-text">MAZO</div>
                     </div>
-                    <div class="modalidad-btn" data-mode="crystal">
+                    <div class="modalidad-btn" data-mode="sg">
+                        <img src="sg.png" alt="SG" class="modalidad-btn-icon">
+                        <div class="modalidad-btn-text">SG</div>
+                    </div>
+                    <div class="modalidad-btn" data-mode="skyward">
+                        <img src="skyward.png" alt="Skyward" class="modalidad-btn-icon">
+                        <div class="modalidad-btn-text">SKYWARD</div>
+                    </div>
+                </div>
+
+                <div class="tops-container">
+                    <div class="jugadores-center">
+                        <div class="empty-state">
+                            <h3>😔 Oh no, nadie se ha unido a esta modalidad</h3>
+                            <p>Espera a que la gente se una para estar en el top.<br><br>¿Quieres unirte? ¡Únete a nuestro Discord!</p>
+                        </div>
+                    </div>
+
+                    <div class="user-panel" id="user-panel">
+                        <button class="collapse-btn" onclick="togglePanel()">⬇</button>
+                        <div class="user-panel-content">
+                            <div class="user-panel-header">
+                                <div class="user-panel-skin">👤</div>
+                                <div class="user-panel-name">Tu Perfil</div>
+                                <div class="user-panel-rank" id="user-rank">👤 MIEMBRO</div>
+                            </div>
+                            <div class="user-panel-stats">
+                                <div class="user-stat-item">
+                                    <div class="user-stat-mode"><img src="mazo.png" class="user-stat-icon"> Mazo</div>
+                                    <div class="user-stat-pos">Top 1</div>
+                                </div>
+                                <div class="user-stat-item">
+                                    <div class="user-stat-mode"><img src="crystal.png" class="user-stat-icon"> Crystal</div>
+                                    <div class="user-stat-pos">Top 1</div>
+                                </div>
+                                <div class="user-stat-item">
+                                    <div class="user-stat-mode"><img src="espada.png" class="user-stat-icon"> Espada</div>
+                                    <div class="user-stat-pos">Top 1</div>
+                                </div>
+                                <div class="user-stat-item">
+                                    <div class="user-stat-mode"><img src="sg.png" class="user-stat-icon"> SG</div>
+                                    <div class="user-stat-pos">Top 1</div>
+                                </div>
+                                <div class="user-stat-item">
+                                    <div class="user-stat-mode"><img src="skyward.png" class="user-stat-icon"> Skyward</div>
+                                    <div class="user-stat-pos">Top 1</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sección AMIGOS -->
+            <div id="amigos-section" class="page-section">
+                <div class="amigos-container">
+                    <div class="amigos-empty">
+                        <h3>😔 Oh no, no tienes amigos</h3>
+                        <p>Agrega amigos para jugar juntos</p>
+                    </div>
+                    <button class="add-friend-btn" onclick="requestContactsPermission()">➕ Añadir Amigo</button>
+                </div>
+            </div>
+
+            <!-- Sección CONFIGURACIÓN -->
+            <div id="config-section" class="page-section">
+                <div class="config-container">
+                    <!-- Nueva opción: Contraseña -->
+                    <div class="config-option">
+                        <h3>🔐 Contraseña</h3>
+                        <p style="color: #888; font-size: 13px; margin-bottom: 15px;">Acceso de administrador y dueño</p>
+                        <button class="config-btn" onclick="openPasswordModal()" style="width: 100%;">
+                            Ingresar Contraseña
+                        </button>
+                    </div>
+
+                    <!-- Opciones exclusivas de DUEÑO -->
+                    <div class="owner-options" id="owner-options">
+                        <div class="config-option" style="border-color: #ffd700; background: linear-gradient(135deg, #1a1a1a 0%, #2a2520 100%);">
+                            <h3 style="color: #ffd700;">👑 Panel de Dueño</h3>
+                            <div class="config-buttons">
+                                <button class="config-btn" onclick="showComingSoon('Añadir Usuario')">
+                                    ➕ Añadir Usuario
+                                </button>
+                                <button class="config-btn" onclick="showComingSoon('Gestionar Admins')">
+                                    🛡️ Gestionar Admins
+                                </button>
+                                <button class="config-btn" onclick="showComingSoon('Ver Reportes')">
+                                    📊 Ver Reportes
+                                </button>
+                                <button class="config-btn" onclick="showComingSoon('Configuración Avanzada')">
+                                    ⚙️ Avanzado
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="config-option">
+                        <h3>🎨 Cambiar Fondo</h3>
+                        <div class="config-buttons">
+                            <button class="config-btn" onclick="document.getElementById('colorPicker').click()">
+                                Elegir Color
+                            </button>
+                            <input type="color" id="colorPicker" onchange="cambiarFondoColor(this.value)">
+                            
+                            <button class="config-btn" onclick="document.getElementById('imagePicker').click()">
+                                Subir Imagen
+                            </button>
+                            <input type="file" id="imagePicker" accept="image/*" onchange="cambiarFondoImagen(this)">
+                            
+                            <button class="config-btn" onclick="resetearFondo()">
+                                Restablecer
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="config-option">
+                        <h3>👁️ Modo de Vista</h3>
+                        <div class="mode-preview">
+                            <div class="mode-option active" onclick="cambiarModo('dark')">
+                                <div class="mode-phone dark"></div>
+                                <div class="mode-label">🌙 OSCURO</div>
+                            </div>
+                            <div class="mode-option" onclick="cambiarModo('light')">
+                                <div class="mode-phone light"></div>
+                                <div class="mode-label">☀️ CLARO</div>
+                            </div>
+                        </div>
+                        <div class="mode-warning" id="modeWarning">
+                            ✅ Modo oscuro ahorra batería y es mejor para tus ojos
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menú inferior -->
+        <div class="bottom-nav">
+            <div class="nav-item active" data-page="tops">
+                <div class="nav-icon">🏆</div>
+                <div class="nav-label">TOPS</div>
+            </div>
+            <div class="nav-item" data-page="amigos">
+                <div class="nav-icon">👥</div>
+                <div class="nav-label">AMIGOS</div>
+            </div>
+            <div class="nav-item" data-page="perfil">
+                <div class="nav-icon">👤</div>
+                <div class="nav-label">PERFIL</div>
+            </div>
+            <div class="nav-item" data-page="config">
+                <div class="nav-icon">⚙️</div>
+                <div class="nav-label">CONFIG</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Perfil Pantalla Completa -->
+    <div class="perfil-fullscreen" id="perfil-fullscreen">
+        <div class="perfil-header-bar">
+            <div class="perfil-title">👤 MI PERFIL</div>
+            <button class="perfil-close-btn" onclick="cerrarPerfil()">✕ SALIR</button>
+        </div>
+        <div class="perfil-body">
+            <div class="perfil-main">
+                <div class="perfil-skin-large">👤</div>
+                <div class="perfil-data">
+                    <h2>Usuario Demo</h2>
+                    <span class="perfil-badge" id="perfil-badge">👤 MIEMBRO</span>
+                </div>
+            </div>
+
+            <div class="perfil-section">
+                <h3>🏆 Modalidades</h3>
+                <div class="perfil-section-content">
+                    <div class="perfil-mode-item"><img src="mazo.png" class="perfil-mode-icon"> Mazo: Top 1</div>
+                    <div class="perfil-mode-item"><img src="crystal.png" class="perfil-mode-icon"> Crystal: Top 1</div>
+                    <div class="perfil-mode-item"><img src="espada.png" class="perfil-mode-icon"> Espada: Top 1</div>
+                    <div class="perfil-mode-item"><img src="sg.png" class="perfil-mode-icon"> SG: Top 1</div>
+                    <div class="perfil-mode-item"><img src="skyward.png" class="perfil-mode-icon"> Skyward: Top 1</div>
+                </div>
+            </div>
+
+            <div class="perfil-section">
+                <h3>📝 Descripción</h3>
+                <div class="perfil-section-content">
+                    ¡Jugador apasionado de Minecraft Bedrock PVP! Me especializo en todas las modalidades y siempre busco mejorar. El primero en unirse al ranking.
+                </div>
+            </div>
+
+            <div class="perfil-section">
+                <h3>📱 Ver mis jugadas</h3>
+                <a href="#" class="perfil-link-btn" onclick="event.preventDefault(); alert('Link a TikTok - Disponible pronto')">
+                    📱 TikTok
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup">
+            <h3 id="popup-title">⚠️ Oh no!</h3>
+            <p id="popup-text">Todavía es una demo.<br>Esta función no está disponible.</p>
+            <button class="popup-btn" onclick="closePopup()">OK</button>
+        </div>
+    </div>
+
+    <script>
+        // Variables globales
+        const loadingScreen = document.getElementById('loading-screen');
+        const loadingVideo = document.getElementById('loading-video');
+        const app = document.getElementById('app');
+        const navItems = document.querySelectorAll('.nav-item');
+        const popup = document.getElementById('popup');
+        const perfilFullscreen = document.getElementById('perfil-fullscreen');
+        const permissionBanner = document.getElementById('permission-banner');
+        const passwordModal = document.getElementById('password-modal');
+        const ownerOptions = document.getElementById('owner-options');
+        let appShown = false;
+        let contactsPermissionGranted = false;
+        let notificationsPermissionGranted = false;
+        let isOwner = false;
+
+        // Correo del dueño (ofuscado)
+        const ownerEmail = atob('cDkxMTI5MjVAZ21haWwuY29t'); // p9112925@gmail.com
+
+        // Pantalla de carga
+        function showApp() {
+            if (appShown) return;
+            appShown = true;
+            
+            console.log('Mostrando app...');
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.transition = 'opacity 0.5s ease';
+            
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                app.style.display = 'flex';
+                app.classList.add('show');
+                console.log('App mostrada correctamente');
+            }, 500);
+        }
+
+        loadingVideo.addEventListener('ended', () => {
+            console.log('Video terminado');
+            showApp();
+        });
+
+        loadingVideo.addEventListener('error', (e) => {
+            console.log('Error al cargar video:', e);
+            setTimeout(showApp, 1000);
+        });
+
+        loadingVideo.addEventListener('timeupdate', function() {
+            if (this.duration > 0 && this.currentTime >= this.duration - 0.1) {
+                console.log('Video casi terminado (timeupdate)');
+                showApp();
+            }
+        });
+
+        loadingVideo.play().catch(err => {
+            console.log('No se pudo reproducir video:', err);
+            setTimeout(showApp, 1000);
+        });
+
+        setTimeout(() => {
+            console.log('Timeout de seguridad activado');
+            showApp();
+        }, 6000);
+
+        setTimeout(() => {
+            if (loadingVideo.currentTime === 0 && !appShown) {
+                console.log('Video no se reprodujo, mostrando app');
+                showApp();
+            }
+        }, 2000);
+
+        // Navegación
+        navItems.forEach(item => {
+            item.addEventListener('click', function() {
+                const page = this.getAttribute('data-page');
+                
+                navItems.forEach(nav => nav.classList.remove('active'));
+                this.classList.add('active');
+                
+                document.querySelectorAll('.page-section').forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                if (page === 'tops') {
+                    document.getElementById('tops-section').classList.add('active');
+                } else if (page === 'amigos') {
+                    document.getElementById('amigos-section').classList.add('active');
+                } else if (page === 'perfil') {
+                    perfilFullscreen.classList.add('show');
+                } else if (page === 'config') {
+                    document.getElementById('config-section').classList.add('active');
+                }
+            });
+        });
+
+        // Cambiar modalidad
+        document.querySelectorAll('.modalidad-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.modalidad-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+
+        // Panel colapsable
+        function togglePanel() {
+            const panel = document.getElementById('user-panel');
+            const btn = panel.querySelector('.collapse-btn');
+            
+            if (panel.classList.contains('collapsed')) {
+                panel.classList.remove('collapsed');
+                btn.textContent = '⬇';
+            } else {
+                panel.classList.add('collapsed');
+                btn.textContent = '⬆';
+            }
+        }
+
+        // Sistema de contraseña
+        function openPasswordModal() {
+            passwordModal.classList.add('show');
+            document.getElementById('password-input').value = '';
+            document.getElementById('password-error').textContent = '';
+        }
+
+        function closePasswordModal() {
+            passwordModal.classList.remove('show');
+        }
+
+        function submitPassword() {
+            const input = document.getElementById('password-input').value.trim().toLowerCase();
+            const errorDiv = document.getElementById('password-error');
+            
+            if (input === ownerEmail.toLowerCase()) {
+                // Correcto - Dar acceso de dueño
+                isOwner = true;
+                updateOwnerStatus();
+                closePasswordModal();
+                
+                // Mostrar mensaje de éxito
+                showPopupMessage('✅ Bienvenido, Dueño', 'Acceso completo concedido. Ahora tienes control total de la aplicación.');
+            } else {
+                // Incorrecto
+                errorDiv.textContent = '❌ Correo incorrecto';
+                setTimeout(() => {
+                    errorDiv.textContent = '';
+                }, 3000);
+            }
+        }
+
+        function updateOwnerStatus() {
+            // Actualizar badge en panel derecho
+            const userRank = document.getElementById('user-rank');
+            userRank.textContent = '👑 DUEÑO';
+            userRank.classList.add('owner');
+            
+            // Actualizar badge en perfil
+            const perfilBadge = document.getElementById('perfil-badge');
+            perfilBadge.textContent = '👑 DUEÑO';
+            perfilBadge.classList.add('owner');
+            
+            // Mostrar opciones de dueño
+            ownerOptions.classList.add('show');
+        }
+
+        // Sistema de permisos
+        function showPermissionBanner(type) {
+            const icon = document.getElementById('permission-icon');
+            const title = document.getElementById('permission-title');
+            const desc = document.getElementById('permission-desc');
+
+            if (type === 'contacts') {
+                icon.textContent = '📞';
+                title.textContent = '¿Quieres añadir amigos?';
+                desc.textContent = 'Activa contactos para añadir gente con tu número o con nombre de Minecraft';
+            } else if (type === 'notifications') {
+                icon.textContent = '🔔';
+                title.textContent = 'Activa las notificaciones';
+                desc.textContent = 'Te notificaremos cuando te eliminen del top o para que veas tus estadísticas';
+            }
+
+            permissionBanner.classList.add('show');
+        }
+
+        function requestContactsPermission() {
+            if (contactsPermissionGranted) {
+                showPopupMessage('📨 Mensajería', 'Mensajería no disponible. Falta base de datos y sistema de moderación. Estará disponible próximamente.');
+            } else {
+                showPermissionBanner('contacts');
+            }
+        }
+
+        function allowPermission() {
+            const title = document.getElementById('permission-title').textContent;
+            
+            if (title.includes('amigos')) {
+                contactsPermissionGranted = true;
+                console.log('Permiso de contactos concedido');
+            } else if (title.includes('notificaciones')) {
+                notificationsPermissionGranted = true;
+                console.log('Permiso de notificaciones concedido');
+            }
+            
+            permissionBanner.classList.remove('show');
+            
+            setTimeout(() => {
+                alert('¡Permiso concedido! Esta función estará disponible pronto.');
+            }, 300);
+        }
+
+        function denyPermission() {
+            permissionBanner.classList.remove('show');
+            console.log('Permiso denegado');
+        }
+
+        // Funciones de perfil
+        function cerrarPerfil() {
+            perfilFullscreen.classList.remove('show');
+        }
+
+        // Funciones de configuración
+        function cambiarFondoColor(color) {
+            document.body.style.background = color;
+            document.body.classList.remove('custom-bg');
+        }
+
+        function cambiarFondoImagen(input) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.body.style.backgroundImage = `url(${e.target.result})`;
+                    document.body.classList.add('custom-bg');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function resetearFondo() {
+            document.body.style.background = '#0a0a0a';
+            document.body.style.backgroundImage = 'none';
+            document.body.classList.remove('custom-bg');
+        }
+
+        function cambiarModo(modo) {
+            const options = document.querySelectorAll('.mode-option');
+            const warning = document.getElementById('modeWarning');
+            
+            options.forEach(opt => opt.classList.remove('active'));
+            
+            if (modo === 'dark') {
+                options[0].classList.add('active');
+                warning.innerHTML = '✅ Modo oscuro ahorra batería y es mejor para tus ojos';
+                warning.style.background = 'rgba(0, 255, 136, 0.1)';
+            } else {
+                options[1].classList.add('active');
+                warning.innerHTML = '⚠️ Modo brillante gastará más batería y puede molestar los ojos';
+                warning.style.background = 'rgba(255, 170, 0, 0.1)';
+                alert('Modo claro estará disponible en versiones futuras');
+            }
+        }
+
+        // Funciones auxiliares
+        function showPopupMessage(title, message) {
+            document.getElementById('popup-title').textContent = title;
+            document.getElementById('popup-text').innerHTML = message;
+            popup.classList.add('show');
+        }
+
+        function closePopup() {
+            popup.classList.remove('show');
+        }
+
+        function showComingSoon(feature) {
+            showPopupMessage('🚧 Próximamente', `La función "${feature}" estará disponible en versiones futuras con base de datos.`);
+        }
+
+        // Cerrar modales al hacer clic fuera
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) closePopup();
+        });
+
+        perfilFullscreen.addEventListener('click', (e) => {
+            if (e.target === perfilFullscreen) cerrarPerfil();
+        });
+
+        passwordModal.addEventListener('click', (e) => {
+            if (e.target === passwordModal) closePasswordModal();
+        });
+
+        // Enter en input de contraseña
+        document.getElementById('password-input').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') submitPassword();
+        });
+    </script>
+</body>
+</html>mode="crystal">
                         <img src="crystal.png" alt="Crystal" class="modalidad-btn-icon">
                         <div class="modalidad-btn-text">CRYSTAL</div>
                     </div>
